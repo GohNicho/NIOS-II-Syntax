@@ -1,0 +1,95 @@
+{
+    "name": "NIOS II ASM",
+    "scopeName": "source.niosii",
+    "fileTypes": ["s"],
+    "uuid": "07629b98-022c-4204-a227-aa65ae352faa",
+
+    // keyword, comment, invalid, entity.name.function, storage.class.type
+
+    "patterns": [
+
+        {   //preprocessor directives
+            "name": "keyword.control.preprocessor",
+            "match": "(\\.equ|\\.global) "
+        },
+
+        {   //preprocessor directives
+            "name": "keyword.control.instruction",
+            "match": "(add|addi|and|andhi|andi|beq|bge|bgeu|bgt|bgtu|ble|bley|blt|bltu|bne|break|bret|callr|cmpeq|cmpeqi|cmepge|cmpgei|cmpeu|cmpgt|cmgti|cmpgtui|cmple|cmplei|cmlpeu|cmpleui|cmplt|cmpltu|cmpltui|cmpne|cmpnei|custom|div|divu|eret|flushd|flushda|flushi|initd|initda|initi|jmp|ldb|ldbio|ldbu|ldbuio|ldh|ldhio|ldhu|ldhuio|ldw|ldwio|mov|movhi|movi|movia|movui|mul|muli|mulxss|mulxsu|mulxuu|nextpc|nop|nor|or|orhi|ori|rdctl|rdprc|ret|rol|roli|ror|sll|slli|sra|srai|srl|srli|stb|stbio|sth|sthio|stw|stwio|sub|subi|sync|trap|wrctl|wrprs|xor|xorhi|xori|ret)(\\s|\n|<<EOF>>)"
+        },
+
+        { // branch, jmp, call
+            "name": "flowcontrol",
+            "begin": "\\s(?=(jumpi|br|call)( \\w)?\\w*)",
+            "end": "$|\n",
+            "patterns": [
+                {
+                    "name": "keyword.control.instruction",
+                    "match": "(jmpi|br|call)"
+                },
+                {
+                    "name": "entity.name.function.label",
+                    "match": "(?<=\\s)\\w*"
+                }
+            ]
+        },
+
+        {   //preprocessor directives
+            "name": "deref",
+            "begin": "(?=[0-9a-zA-Z|_]*\\((r[0-9]|ra|sp)\\))",
+            "end": " |\n|#|<<EOF>>",
+            "patterns": [
+                {
+                    "name": "constant.numeric.offset.niosii",
+                    "match": ".*(?=\\()"
+                },
+                {
+                    "name": "constant.numeric.offset.control.paren",
+                    "match": "\\(|\\)"
+                }
+            ]
+        },
+
+        {   //labels
+            "name": "entity.name.function.label",
+            "match": "[0-9a-zA-Z|_]*:"
+        },
+
+        {   // line comments
+            "name": "comment.line.niosii",
+            "begin": "#",
+            "end": "$",
+            "patterns": [
+            ]
+        },
+
+        {   // block
+            "name": "comment.block.niosii",
+            "begin": "/\\*",
+            "end": "\\*/",
+            "patterns": [
+            ]
+        },
+
+
+        {   // numeric constants
+            "name": "numeric.niosii",
+            "begin": " (?=-?[0-9]+)",
+            "end": "[^0-9\\-]",
+            "patterns": [
+                {
+                    "name": "keyword.control.negative.numeric",
+                    "match": "-",
+                    "patterns": []
+                },
+                {
+                    "name": "constant.numeric",
+                    "match": "[0-9]",
+                    "patterns": []
+                }
+            ]
+        }
+    ],
+    "repository": {
+    }
+}

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>s</string>
+	</array>
+	<key>name</key>
+	<string>NIOS II ASM</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>match</key>
+			<string>(\.equ|\.global) </string>
+			<key>name</key>
+			<string>keyword.control.preprocessor</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(add|addi|and|andhi|andi|beq|bge|bgeu|bgt|bgtu|ble|bley|blt|bltu|bne|break|bret|callr|cmpeq|cmpeqi|cmepge|cmpgei|cmpeu|cmpgt|cmgti|cmpgtui|cmple|cmplei|cmlpeu|cmpleui|cmplt|cmpltu|cmpltui|cmpne|cmpnei|custom|div|divu|eret|flushd|flushda|flushi|initd|initda|initi|jmp|ldb|ldbio|ldbu|ldbuio|ldh|ldhio|ldhu|ldhuio|ldw|ldwio|mov|movhi|movi|movia|movui|mul|muli|mulxss|mulxsu|mulxuu|nextpc|nop|nor|or|orhi|ori|rdctl|rdprc|ret|rol|roli|ror|sll|slli|sra|srai|srl|srli|stb|stbio|sth|sthio|stw|stwio|sub|subi|sync|trap|wrctl|wrprs|xor|xorhi|xori|ret)(\s|
+|&lt;&lt;EOF&gt;&gt;)</string>
+			<key>name</key>
+			<string>keyword.control.instruction</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\s(?=(jumpi|br|call)( \w)?\w*)</string>
+			<key>end</key>
+			<string>$|
+</string>
+			<key>name</key>
+			<string>flowcontrol</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(jmpi|br|call)</string>
+					<key>name</key>
+					<string>keyword.control.instruction</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?&lt;=\s)\w*</string>
+					<key>name</key>
+					<string>entity.name.function.label</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(?=[0-9a-zA-Z|_]*\((r[0-9]|ra|sp)\))</string>
+			<key>end</key>
+			<string> |
+|#|&lt;&lt;EOF&gt;&gt;</string>
+			<key>name</key>
+			<string>deref</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>.*(?=\()</string>
+					<key>name</key>
+					<string>constant.numeric.offset.niosii</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\(|\)</string>
+					<key>name</key>
+					<string>constant.numeric.offset.control.paren</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>[0-9a-zA-Z|_]*:</string>
+			<key>name</key>
+			<string>entity.name.function.label</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>#</string>
+			<key>end</key>
+			<string>$</string>
+			<key>name</key>
+			<string>comment.line.niosii</string>
+			<key>patterns</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>name</key>
+			<string>comment.block.niosii</string>
+			<key>patterns</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string> (?=-?[0-9]+)</string>
+			<key>end</key>
+			<string>[^0-9\-]</string>
+			<key>name</key>
+			<string>numeric.niosii</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>-</string>
+					<key>name</key>
+					<string>keyword.control.negative.numeric</string>
+					<key>patterns</key>
+					<array/>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>[0-9]</string>
+					<key>name</key>
+					<string>constant.numeric</string>
+					<key>patterns</key>
+					<array/>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict/>
+	<key>scopeName</key>
+	<string>source.niosii</string>
+	<key>uuid</key>
+	<string>07629b98-022c-4204-a227-aa65ae352faa</string>
+</dict>
+</plist>
